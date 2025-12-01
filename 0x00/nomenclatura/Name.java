@@ -12,7 +12,7 @@ public class Name {
     }
 
     // Declarações corretas (A)
-    public List<Account> accountList;
+    public List<Account> AccountList;
 
     // Sem prefixos (B)
     public void deleteUser(Name.User user) {
