@@ -1,4 +1,5 @@
 import java.util.Date;
+import org.springframework.web.bind.annotation.PostMapping;
 
 public class Functions {
 
@@ -21,13 +22,12 @@ public class Functions {
     public void saveUserSimple(User user) {
     }
 
-    //No side effects (B)
-    public User saveUserWithoutSideEffects(User user) {
+    //No side effects (A)
+    public User saveUser(User user){
+        if(user.isAdmin){
+            user.setRole(user);
+        }
         return userRepository.save(user);
-    }
-
-    public void setRole(User user) {
-        user.setRole(user);
     }
 
     //Evite duplicados, extraindo para novos métodos (B)
@@ -43,7 +43,7 @@ public class Functions {
         return versionService.getVersion();
     }
 
-    // Dependências simuladas para compilação
+    //Dependências simuladas para compilação
     private IncomeRepository inRepo;
     private ExpenseRepository outRepo;
     private UserService userService;
@@ -52,12 +52,15 @@ public class Functions {
     private ReleaseService releaseService;
     private VersionService versionService;
 
-    // Classes e interfaces auxiliares fictícias
+    //Classes e interfaces auxiliares fictícias
     static class Income {}
     static class Expense {}
+
     static class User {
+        boolean isAdmin;
         void setRole(User user) {}
     }
+
     static class Environment {}
     static class Release {}
 
